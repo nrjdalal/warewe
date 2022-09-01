@@ -31,7 +31,9 @@ const searcher = async (search) => {
 }
 
 app.get('/', function async(req, res) {
-  searcher(req.query.q).then((data) => res.status(200).json({ info: 'DuckDuckGo Top 10 Organic Search Results', data }))
+  searcher(req.query.q).then((data) =>
+    res.status(200).json({ meta: { query: req.query.q, info: 'DuckDuckGo Top 10 Organic Search Results' }, data })
+  )
 })
 
 app.listen(port, () => {
