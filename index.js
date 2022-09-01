@@ -20,13 +20,15 @@ const searcher = async () => {
       })
     )
 
-    const results = []
+    console.log(data)
 
-    for (i = 0; i < data.length; i++) {
-      results.push(data[i])
-    }
+    // const results = []
 
-    console.log(results)
+    // for (i = 0; i < data.length; i++) {
+    //   results.push(data[i])
+    // }
+
+    // console.log(results)
   } catch {
     console.log('Something Went Wrong!')
   }
