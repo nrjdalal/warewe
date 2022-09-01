@@ -21,14 +21,6 @@ const searcher = async () => {
     )
 
     console.log(data)
-
-    // const results = []
-
-    // for (i = 0; i < data.length; i++) {
-    //   results.push(data[i])
-    // }
-
-    // console.log(results)
   } catch {
     console.log('Something Went Wrong!')
   }
