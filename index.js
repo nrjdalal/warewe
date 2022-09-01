@@ -1,12 +1,14 @@
-const puppeteer = require('puppeteer')
+import puppeteer from 'puppeteer'
+import express from 'express'
+const app = express()
+const port = 3000
 
-const search = 'latest news'
-
-const searcher = async () => {
+const searcher = async (search) => {
   const browser = await puppeteer.launch({
     // headless: false,
     // args: ['--window-size=1280,720'],
   })
+
   const context = await browser.createIncognitoBrowserContext()
   const page = await context.newPage()
   await page.setViewport({ width: 1280, height: 720 })
@@ -20,7 +22,7 @@ const searcher = async () => {
       })
     )
 
-    console.log(data)
+    return data
   } catch {
     console.log('Something Went Wrong!')
   }
@@ -28,4 +30,10 @@ const searcher = async () => {
   await browser.close()
 }
 
-searcher()
+app.get('/', function async(req, res) {
+  searcher(req.query.q).then((data) => res.status(200).json({ info: 'DuckDuckGo Top 10 Organic Search Results', data }))
+})
+
+app.listen(port, () => {
+  console.log(`Searcher is listening on port ${port}`)
+})
